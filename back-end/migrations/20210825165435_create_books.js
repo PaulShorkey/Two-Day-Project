@@ -5,6 +5,7 @@ exports.up = function(knex) {
       table.string('book_title').notNullable();
       table.string('author');
       table.string('isbn_number');
+      table.boolean('is_checked_out').defaultTo(false);
     });
   };
   

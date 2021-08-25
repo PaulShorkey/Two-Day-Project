@@ -1,6 +1,15 @@
 version: '3'
 
 services:
+
+  # backend:
+  #   build: back-end/
+  #   depends_on:
+  #     - postgres
+  #   ports:
+  #     - '3001:3001'
+  #   command: sh -c "npx knex migrate:latest && npx knex seed:run && npm start"
+
   postgres:
     image: 'postgres'
     container_name: 'postgres_docker'
