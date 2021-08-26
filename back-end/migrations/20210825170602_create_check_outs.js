@@ -8,7 +8,9 @@ exports.up = function(knex) {
       table.integer('user_id')
            .references('id')
            .inTable('users');
-      table.timestamps(true, true);
+      table.date('borrow_date');
+      table.specificType('due_date', knex.raw(`date GENERATED ALWAYS AS (borrow_date + 14) STORED`));
+      table.date('return_date');
     });
   };
   
