@@ -61,7 +61,6 @@ app.post('/api/books/:bookId/checkout/:userId', async function(req, res) {
     const bookId  = req.params.bookId++;
     const userId  = req.params.userId++;
     
-    console.log(bookId, userId);
     if( bookId && userId ) {
       //computes currentDate
       var today = new Date();
@@ -99,27 +98,40 @@ app.post('/api/books/:bookId/checkout/:userId', async function(req, res) {
 });
 
 app.post('/api/books/:bookId/return', async function(req, res) {
-  console.log(req);
-  res.status(200).json({
-    message: 
-      'This is the POST /api/books/:bookId/return endpoint!'
-  }) 
-  // try { 
 
-  //   const { bookId, userId } = res.param;
-  //   if( bookId && userId ) {
-      
-  //     if( !someQuery ) {
-  //       res.status(404).send({ message: 'bookId or userId does not exist.'});
-  //     }
-  //     res.status(200).send(bookQuery);
+  try { 
+    const bookId = req.params.bookId++;
+    if( bookId ) {
+     
+      var today = new Date();
+      var currentDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      const { is_checked_out }  = await knex
+        .select('is_checked_out')
+        .from('books')
+        .where('id', bookId)
+        .first()
+      console.log(typeof is_checked_out, is_checked_out);
+      if (is_checked_out) {
+        
+        const updateCheckOutsQuery = await knex('check_outs')
+          .update('return_date', currentDate)
+          .where('book_id', bookId)
+          
+        const updateBooksQuery = await knex('books')
+          .update('is_checked_out', false)
+          .where('id', bookId)
+        
+        res.status(200).send({ message: 'Book is returned.'});
 
-  //   } else {
-  //     res.status(422).send({ message: 'bookId or userId was not supplied.'})
-  //   }
-  // } catch (err) {
-  //   res.status(500).send(err);
-  // }  
+      } else {
+        res.status(200).send({ message: 'Book is not checked out'});
+      }
+    } else {
+      res.status(422).send({ message: 'bookId or userId was not supplied.'})
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }  
 });
 
 //app.delete()
