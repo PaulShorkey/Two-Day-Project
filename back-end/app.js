@@ -3,7 +3,7 @@ const app = express();
 var cors = require('cors');
 const knex = require('knex')(require('./knexfile.js').development);
 
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -154,10 +154,7 @@ app.post('/api/books/:bookId/return', async function(req, res) {
     res.status(500).send(err);
   }  
 });
-
 //app.delete()
-
-
 app.get('/', (req, res) => {
  res.send('Hello World! Use /books endpoint for data!')
 })

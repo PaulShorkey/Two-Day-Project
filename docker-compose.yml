@@ -1,6 +1,14 @@
 version: '3'
 
 services:
+  frontend:
+    build: front-end/
+    depends_on:
+      - backend
+    ports:
+      - '3000:3000'
+    volumes: 
+      - ./front-end/:/src/app
 
   backend:
     build: back-end/
