@@ -22,21 +22,28 @@ app.get('/api/books/', function(req, res) {
 });
 
 app.get('/api/books/:bookId', async function(req, res) {
- const { bookId } = req.params;
- console.log(bookId);
- if ( bookId ) {
-   await knex
-      .select('*')
-      .from('check_outs')
-      .where('book_id', bookId)
-      .then(data => res.status(200).json(data))
-      .catch(err =>
-        res.status(404).json({
-          message:
-            'The data you are looking for could not be found. Please try again'
-    }));
+  try {
+    const { bookId } = req.params;
+
+    if( bookId) {
+
+      const bookQuery = await knex.select('*')
+        .from('books')
+        .innerJoin('check_outs', 'books.id', 'check_outs.book_id')
+        .where('books.id', bookId)
+      
+      if( !bookQuery ) {
+        res.status(404).send({ message: 'bookId does not exist.'});
+      }
+      res.status(200).send(bookQuery);
+
+    } else {
+      res.status(422).send({ message: 'No bookId supplied.'})
+    }
+  } catch (err) {
+    res.status(500).send(err);
   }
-});
+ });
 
 app.get('/api/books/:bookId/checkout/:userId', async function(req, res) {
   const { bookId, userId } = req.params;
@@ -51,7 +58,7 @@ app.post('/api/books/:bookId/checkout/:userId', async function(req, res) {
   console.log(req);
   res.status(200).json({
     message: 
-      'This is the POST /api/books/:bookId/checkout/:userId endpoint!'
+      'This is the POST /api/books/:bookId/checkout/:userId endpoint!' 
   })   
 });
 
