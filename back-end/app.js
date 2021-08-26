@@ -45,13 +45,34 @@ app.get('/api/books/:bookId', async function(req, res) {
   }
  });
 
+app.get('/api/books/:bookId/checkout/', async function(req, res) {
+  res.status(404).send({ message: 'Invalid link.'}); 
+});
+
 app.get('/api/books/:bookId/checkout/:userId', async function(req, res) {
-  const { bookId, userId } = req.params;
-  console.log(req.params);
-  res.status(200).json({
-    message: 
-      'This is the GET /api/books/:bookId/checkout/:userId endpoint!'
-  })   
+  try {
+    const bookId  = req.params.bookId++;
+    const userId = req.params.userId++;
+    
+    if( bookId && userId) {
+    
+      const bookQuery = await knex.select('*')
+        .from('books')
+        .leftJoin('check_outs', 'books.id', 'check_outs.book_id')
+        .where('books.id', bookId)
+        .first();
+      
+      if( !bookQuery ) {
+        res.status(404).send({ message: 'bookId does not exist.'});
+      }
+      res.status(200).send(bookQuery);
+
+    } else {
+      res.status(200).send({ message: 'bookId or userId does not exist.'})
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
 app.post('/api/books/:bookId/checkout/:userId', async function(req, res) {
