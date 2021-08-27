@@ -1,34 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
 import React, {useEffect, useState}  from "react";
-import Data from './Data.jsx'
+import { Redirect, Route, Switch } from 'react-router-dom';
+
+
+/// FILE IMPORTS ///
+import NavBar from './components/NavBar.js';
+import Books from './components/Books.js';
+//import Book from './components/Book.js';
+//import Checkout from './components/Checkout.js';
+//import Return from './components/Return.js';
+
 
 function App() {
-  const [books, setBooks] = useState([])
-  console.log('IN THE APP')
-
-  useEffect(async () => {
-      const result = await fetch('http://localhost:3001/api/books');
-      const data = await result.json();
-      setBooks(data);
-    }, [setBooks]);
+  const [books, setBooks] = useState([]);
+   
+  useEffect(() => {
+    async function fetchBooks() {
+        const result = await fetch('http://localhost:3001/api/books');
+        const json = await result.json();
+        setBooks(json);
+      }
+      fetchBooks();
+  }, []);
 
   return (
-    <div className="App">
+    <div>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Data from Postgres</h2>
-        <table>
-          <tr>
-            <th>Book Id</th>
-            <th>Book Name</th>
-            <th>Author</th>
-          </tr>
-          <Data books={books}/>
-        </table>
+        <NavBar />
       </header>
+      <Switch>
+        <Route exact path="/books">
+          <Books books={books}/>
+        </Route>
+        <Redirect to='/books'/>
+      </Switch>
     </div>
   );
 }
 
 export default App;
+
+
+
+
