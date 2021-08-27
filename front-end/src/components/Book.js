@@ -21,7 +21,7 @@ function Book({book, key}) {
             <TableCell align="center">{book.book_title}</TableCell>
             <TableCell align="center">{book.author}</TableCell>
             <TableCell align="center">{book.isbn_number}</TableCell>
-            <TableCell align="center">{book.is_checked_out.toString()}</TableCell>
+            <TableCell align="center">{book.is_checked_out ? 'Yes': 'No'}</TableCell>
       </>
     );
   }
