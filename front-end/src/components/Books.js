@@ -23,10 +23,11 @@ function Books({books}) {
         <Table className={classes.table} size="small" aria-label="a dense table">  
             <TableHead>
                 <TableRow>
-                    <TableCell align="center">Book Title</TableCell>
-                    <TableCell align="center">Author</TableCell>
-                    <TableCell align="center">ISBN Number</TableCell>
-                    <TableCell align="center">Checked out?</TableCell>
+                  <TableCell align="center">Book ID</TableCell>
+                  <TableCell align="center">Book Title</TableCell>
+                  <TableCell align="center">Author</TableCell>
+                  <TableCell align="center">ISBN Number</TableCell>
+                  <TableCell align="center">Checked out?</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>

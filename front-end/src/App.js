@@ -31,6 +31,15 @@ function App() {
         <Route exact path="/books">
           <Books books={books}/>
         </Route>
+        <Route exact path="/book">
+          <div>Book</div>
+        </Route>
+        <Route exact path="/checkout">
+          <div>Check Out</div>
+        </Route>
+        <Route exact path="/return">
+          <div>Return</div>
+        </Route>
         <Redirect to='/books'/>
       </Switch>
     </div>
