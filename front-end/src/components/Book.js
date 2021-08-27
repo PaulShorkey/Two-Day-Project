@@ -2,9 +2,9 @@ import { makeStyles} from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 
 const useStyles = makeStyles({
-    table: {
-        minWidth: 650,
-    },
+  table: {
+    minWidth: 650,
+  },
 });
 
 function Book({book}) {

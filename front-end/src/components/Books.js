@@ -19,27 +19,27 @@ function Books({books}) {
   const classes = useStyles();
 
   return (
-      <TableContainer component={Paper}>
-        <Table className={classes.table} size="small" aria-label="a dense table">  
-            <TableHead>
-                <TableRow>
-                  <TableCell align="center">Book ID</TableCell>
-                  <TableCell align="center">Book Title</TableCell>
-                  <TableCell align="center">Author</TableCell>
-                  <TableCell align="center">ISBN Number</TableCell>
-                  <TableCell align="center">Checked out?</TableCell>
-                </TableRow>
-            </TableHead>
-            <TableBody>
-              { books.map((book, index) => {
-                  return (
-                    <TableRow key={index} >
-                      <Book book={book} />
-                    </TableRow>
-                )})}
-            </TableBody>
-        </Table>
-      </TableContainer>
+    <TableContainer component={Paper}>
+      <Table className={classes.table} size="small" aria-label="a dense table">  
+        <TableHead>
+          <TableRow>
+            <TableCell align="center">Book ID</TableCell>
+            <TableCell align="center">Book Title</TableCell>
+            <TableCell align="center">Author</TableCell>
+            <TableCell align="center">ISBN Number</TableCell>
+            <TableCell align="center">Checked out?</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          { books.map((book, index) => {
+            return (
+              <TableRow key={index} >
+                <Book book={book} />
+              </TableRow>
+          )})}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 export default Books;
