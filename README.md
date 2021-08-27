@@ -53,3 +53,21 @@ This should be containerized and utilize `docker-compose`, and should have a REA
     
 - [x] As a librarian, I want to be able to update the system for a book that has been returned
     API endpoint: `/api/books/:bookId/return`
+
+References:
+
+1. https://reactjs.org/docs/lists-and-keys.html#keys
+
+2. https://reactjs.org/docs/hooks-faq.html#how-can-i-do-data-fetching-with-hooks
+
+3. https://knexjs.org/
+
+4. https://pgdash.io/blog/postgres-12-generated-columns.html
+
+5. https://devhints.io/knex
+
+6. https://stackoverflow.com/questions/50505078/docker-compose-making-knex-work-with-postgres
+
+7. https://www.javatpoint.com/react-router
+
+8. https://reactrouter.com/web/guides/quick-start
