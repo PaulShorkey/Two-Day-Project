@@ -3,7 +3,7 @@ import React, {useEffect, useState}  from "react";
 
 
 /// FILE IMPORTS ///
-import NavBar from './components/NavBar.js';
+import NavBar from '../components/NavBar.js';
 //import Books from './components/Books.js';
 //import Book from './components/Book.js';
 //import Checkout from './components/Checkout.js';
